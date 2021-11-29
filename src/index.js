@@ -1,3 +1,8 @@
+// set up .env variables
+require('dotenv').config()
+console.log(`Env variable message was:\n${process.env.NICE_MESSAGE}`);
+
+
 const express = require('express');
 // Initialize Express as an instance named "app".
 const app = express();
@@ -16,6 +21,11 @@ app.use(express.urlencoded({extended:true}));
 app.get('/', (request, response) => {
   response.json("It's Tuesday yeah !");
 });
+
+
+const importedPostRouting = require('./Posts/postsRoutes');
+app.use('/posts', importedPostRouting);
+
 
 app.listen(PORT, HOST, () => {
   console.log("Server is running!")
